@@ -1,7 +1,6 @@
 #include <Vector.h>
 #include <stdexcept>
 
-
 // ======================== c-tors & d-tor =======================
 
 /**
@@ -54,7 +53,6 @@ Vector::~Vector()
 {
 	delete[] m_vector;
 }
-
 
 // ======================== methods ==============================
 
@@ -128,7 +126,6 @@ void Vector::resize(size_t size, int value)
 	m_size = size;
 }
 
-
 /**
  * swap the current vector with another vector
  * @param other the vector to swap with
@@ -140,7 +137,6 @@ void Vector::swap(Vector& other) noexcept
 	std::swap(m_vector, other.m_vector);
 }
 
-
 /**
  * push_back adds a new element to the end of the vector
  * @param value the value to add to the vector
@@ -150,7 +146,6 @@ void Vector::push_back(int value)
 	check_capacity();
 	m_vector[m_size++] = value;
 }
-
 
 /**
  * pop_back removes the last element from the vector
@@ -232,7 +227,6 @@ Vector& Vector::operator=(Vector&& other) noexcept
 	return *this;
 }
 
-
 /**
  * operator[] regular and const versions
  * @param index the index of the element to return
@@ -267,7 +261,6 @@ bool Vector::operator==(const Vector& other) const
 	return false;
 }
 
-
 /**
  * operator<=> compares two vectors
  * @param other the the vector to compare with  
@@ -283,7 +276,6 @@ std::strong_ordering Vector::operator<=>(const Vector& other) const noexcept
 	}
 	return std::strong_ordering::greater;
 }
-
 
 // ==================== private methods ==========================
 
