@@ -1,7 +1,0 @@
-C:/Users/BenSimmanTov/Desktop/semester b/cpp/week1/ex1/tasks_week1_ranelbe/task1_vector/out/build/x64-Debug/CMakeFiles/task1_vector.dir
-C:/Users/BenSimmanTov/Desktop/semester b/cpp/week1/ex1/tasks_week1_ranelbe/task1_vector/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/BenSimmanTov/Desktop/semester b/cpp/week1/ex1/tasks_week1_ranelbe/task1_vector/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/BenSimmanTov/Desktop/semester b/cpp/week1/ex1/tasks_week1_ranelbe/task1_vector/out/build/x64-Debug/include/CMakeFiles/edit_cache.dir
-C:/Users/BenSimmanTov/Desktop/semester b/cpp/week1/ex1/tasks_week1_ranelbe/task1_vector/out/build/x64-Debug/include/CMakeFiles/rebuild_cache.dir
-C:/Users/BenSimmanTov/Desktop/semester b/cpp/week1/ex1/tasks_week1_ranelbe/task1_vector/out/build/x64-Debug/src/CMakeFiles/edit_cache.dir
-C:/Users/BenSimmanTov/Desktop/semester b/cpp/week1/ex1/tasks_week1_ranelbe/task1_vector/out/build/x64-Debug/src/CMakeFiles/rebuild_cache.dir
