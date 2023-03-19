@@ -1,7 +1,5 @@
 #include <iostream>
-#include <iostream>
 #include "Vector.h"
-#include <vector>
 
 int main()
 {
