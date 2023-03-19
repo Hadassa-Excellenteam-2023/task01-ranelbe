@@ -261,6 +261,11 @@ bool Vector::operator==(const Vector& other) const
 	return false;
 }
 
+bool Vector::operator!=(const Vector& other) const
+{
+	return !(*this == other);
+}
+
 /**
  * operator<=> compares two vectors
  * @param other the the vector to compare with  
@@ -275,6 +280,18 @@ std::strong_ordering Vector::operator<=>(const Vector& other) const noexcept
 		return std::strong_ordering::less;
 	}
 	return std::strong_ordering::greater;
+}
+
+// ==================== iterators ================================
+
+int* Vector::begin() const
+{
+	return m_vector;
+}
+
+int* Vector::end() const
+{
+	return m_vector + m_size;
 }
 
 // ==================== private methods ==========================
@@ -305,6 +322,7 @@ void Vector::check_capacity()
 std::ostream& operator<<(std::ostream& os, const Vector& vector)
 {
 	os << "[";
+
 	for (size_t i = 0; i < vector.size(); ++i) {
 		os << vector[i];
 		if (i != vector.size() - 1) {

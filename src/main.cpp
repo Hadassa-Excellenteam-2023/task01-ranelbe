@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Vector.h"
+#include "Stack.h"
 
-int main()
-{
+void vector_test() {
 	// check the default ctor
 	Vector v1(1);
 	Vector v2(2, 1);
@@ -16,7 +16,7 @@ int main()
 	// check the move ctor
 	Vector v5(std::move(v3)); //v3 is now empty
 	std::cout << "\nv5: " << v5;
-	
+
 	// check the operator=
 	Vector v6 = v4;
 	std::cout << "\nv6: " << v6;
@@ -38,7 +38,7 @@ int main()
 
 	// check the empty method
 	std::cout << "\nv2.empty(): " << (v2.empty() ? "empty" : "not empty");
-	
+
 	// check the push_back method and insert method
 	v2.push_back(3);
 	v2.insert(1, 4);
@@ -49,7 +49,7 @@ int main()
 	// check the size and capacity methods
 	std::cout << "\nv2.size(): " << v2.size();
 	std::cout << "\nv2.capacity(): " << v2.capacity();
-	
+
 	//check the pop_back method and erase method
 	v2.pop_back();
 	v2.erase(1);
@@ -78,6 +78,72 @@ int main()
 	std::cout << "\nv2 <= v4: " << (v2 <= v4 ? "true" : "false");
 	std::cout << "\nv2 > v4: " << (v2 > v4 ? "true" : "false");
 	std::cout << "\nv2 >= v4: " << (v2 >= v4 ? "true" : "false");
+}
 
+void stack_test() {
+	// check the default ctor
+	Stack s1(1);
+	Stack s2(2, 1);
+	std::cout << "s1: " << s1 << "\ns2: " << s2;
+
+	// check the copy ctor
+	Stack s3(s1);
+	Stack s4(s2);
+	std::cout << "\ns3: " << s3 << "\ns4: " << s4;
+
+	// check the move ctor
+	Stack s5(std::move(s3)); //s3 is now empty
+	std::cout << "\ns5: " << s5;
+
+	// check the operator=
+	Stack s6 = s4;
+	std::cout << "\ns6: " << s6;
+
+	// check the moving operator=
+	Stack s7 = std::move(s5); //s5 is now empty
+	std::cout << "\ns7: " << s7;
+
+	// check the push and pop methods
+	s2.push(3);
+	s2.push(4);
+	s2.push(5);
+	std::cout << "\ns2: " << s2;
+	s2.pop();
+	std::cout << "\ns2: " << s2;
+
+	// check the isEmpty method
+	std::cout << "\ns2.empty(): " << (s2.isEmpty() ? "empty" : "not empty");
+
+	//check the comparation operators
+	std::cout << "\ns2 == s4: " << (s2 == s4 ? "true" : "false");
+	std::cout << "\ns4 == s6: " << (s4 == s6 ? "true" : "false");
+	std::cout << "\ns4 != s6: " << (s4 != s6 ? "true" : "false");
+	std::cout << "\ns4 < s6: " << (s4 < s6 ? "true" : "false");
+	std::cout << "\ns4 <= s6: " << (s4 <= s6 ? "true" : "false");
+	std::cout << "\ns4 > s6: " << (s4 > s6 ? "true" : "false");
+	std::cout << "\ns4 > s2: " << (s4 > s2 ? "true" : "false");
+	std::cout << "\ns4 >= s6: " << (s4 >= s6 ? "true" : "false");
+
+	// check the arithmetic operators
+	s2 += 3;
+	std::cout << "\ns2+=3: " << s2;
+	s2 -= 2;
+	std::cout << "\ns2-=2: " << s2;
+	s2 *= 3;
+	std::cout << "\ns2*=3: " << s2;
+	s2 /= 3;
+	std::cout << "\ns2/=3: " << s2;
+
+	// check the operators between two stacks
+	s2+=s4+=s1+=s2;
+	std::cout << "\ns2+=s4+=s1+=s2: " << s2;
+}
+
+
+int main()
+{
+	vector_test();
+	stack_test();
 	return 0;
 }
+

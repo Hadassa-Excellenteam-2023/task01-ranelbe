@@ -35,7 +35,14 @@ public:
 	const int& operator[](size_t index) const;
 
 	bool operator==(const Vector& other) const;
+	bool operator!=(const Vector& other) const;
 	std::strong_ordering operator<=>(const Vector& other) const noexcept;
+
+	// ========== iterable =====================
+	int* begin() const;
+	int* end() const;
+
+
 
 
 private:
