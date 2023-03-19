@@ -1,8 +1,10 @@
 #pragma once
 #include <compare>
+#include <iostream>
 
 class Vector
 {
+
 public:
 	// ========== c-tors & d-tor ===============
 	explicit Vector(size_t size = 0, int value = 0);
@@ -35,7 +37,7 @@ public:
 	bool operator==(const Vector& other) const;
 	std::strong_ordering operator<=>(const Vector& other) const noexcept;
 
-	
+
 private:
 	// ========= private methods ================
 	void check_capacity();
@@ -45,3 +47,6 @@ private:
 	size_t m_capacity;
 	int* m_vector = nullptr;
 };
+
+//print the vector
+std::ostream& operator<<(std::ostream& os, const Vector& vector);

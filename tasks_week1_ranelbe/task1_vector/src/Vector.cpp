@@ -217,9 +217,9 @@ Vector& Vector::operator=(const Vector& other)
 **/
 Vector& Vector::operator=(Vector&& other) noexcept
 {
+	// move and swap idiom implementation
 	if (this != &other)
 	{
-		// move and swap idiom implementation
 		this->swap(other);
 		other.m_vector = nullptr;
 		other.m_size = other.m_capacity = 0;
@@ -292,4 +292,25 @@ void Vector::check_capacity()
 	else if (m_capacity == m_size) {
 		m_capacity < 128 ? reserve(m_capacity * 2) : reserve(m_capacity * 1.5);
 	}
+}
+
+// ==================== global functions =========================
+
+/**
+ * operator<< prints the vector to the given output stream
+ * @param os the output stream to print to
+ * @param vector the vector to print
+ * @return the output stream after printing
+ **/
+std::ostream& operator<<(std::ostream& os, const Vector& vector)
+{
+	os << "[";
+	for (size_t i = 0; i < vector.size(); ++i) {
+		os << vector[i];
+		if (i != vector.size() - 1) {
+			os << ", ";
+		}
+	}
+	os << "]";
+	return os;
 }
