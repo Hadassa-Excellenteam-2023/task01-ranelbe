@@ -112,7 +112,7 @@ void stack_test() {
 	std::cout << "\ns2: " << s2;
 
 	// check the isEmpty method
-	std::cout << "\ns2.empty(): " << (s2.isEmpty() ? "empty" : "not empty");
+	std::cout << "\ns2.isEmpty(): " << (s2.isEmpty() ? "empty" : "not empty");
 
 	//check the comparation operators
 	std::cout << "\ns2 == s4: " << (s2 == s4 ? "true" : "false");

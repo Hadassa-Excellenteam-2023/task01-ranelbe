@@ -52,6 +52,7 @@ Vector::Vector(Vector&& other) noexcept:
 Vector::~Vector()
 {
 	delete[] m_vector;
+	m_vector = nullptr;
 }
 
 // ======================== methods ==============================
@@ -152,7 +153,7 @@ void Vector::push_back(int value)
  **/
 void Vector::pop_back()
 {
-	if (m_size > 0) {
+	if (!empty()) {
 		--m_size;
 	}
 }
