@@ -10,8 +10,8 @@
  **/
 Vector::Vector(size_t size, int value):
 	m_size(size),
-	m_capacity(size),
-	m_vector(new int[size])
+	m_capacity(size ? size : 1),
+	m_vector(new int[m_capacity])
 {
 	for (size_t i = 0; i < m_size; ++i) {
 		m_vector[i] = value; 
@@ -23,12 +23,12 @@ Vector::Vector(size_t size, int value):
  * @param other the vector to copy
  **/
 Vector::Vector(const Vector& other):
-	m_size(other.m_size),
-	m_capacity(other.m_capacity),
+	m_size(other.size()),
+	m_capacity(other.capacity()),
 	m_vector(new int[m_capacity])
 {
 	for (size_t i = 0; i < m_size && i < m_capacity; ++i) {
-		m_vector[i] = other.m_vector[i];
+		m_vector[i] = other.data()[i];
 	}
 }
 
@@ -37,13 +37,11 @@ Vector::Vector(const Vector& other):
  * @param other the vector to move
  **/
 Vector::Vector(Vector&& other) noexcept:
-	m_size(other.m_size),
-	m_capacity(other.m_capacity),
-	m_vector(other.m_vector)
+	m_size(other.size()),
+	m_capacity(other.capacity()),
+	m_vector(other.data())
 {
-	// prevent access of the moved vector to the memory
-	other.m_vector = nullptr; 
-	other.m_size = other.m_capacity = 0;
+	other.init();
 }
 
 /**
@@ -62,10 +60,17 @@ int* Vector::data()
 	return m_vector;
 }
 
+void Vector::init()
+{
+	m_vector = nullptr;
+	m_size = 0;
+}
+
 const int* Vector::data() const
 {
 	return m_vector;
 }
+
 
 bool Vector::empty() const
 {
@@ -88,19 +93,18 @@ size_t Vector::capacity() const
 void Vector::clear()
 {
 	delete[] m_vector;
-	m_vector = nullptr;
-	m_size = m_capacity = 0;
+	init();
 }
 
 /**
  * reserve memory for the vector
- * @param size the new size of the vector
+ * @param capacity the new capacity of the vector
  **/
-void Vector::reserve(size_t size)
+void Vector::reserve(size_t capacity)
 {
-	if (size > m_capacity) {
+	if (capacity > m_capacity) {
 		// allocate new memory
-		int* newVector = new int[size];
+		int* newVector = new int[capacity];
 		// copy the old vector to the new vector
 		for (size_t i = 0; i < m_size; ++i) {
 			newVector[i] = m_vector[i];
@@ -108,7 +112,7 @@ void Vector::reserve(size_t size)
 		// free the old memory and update the vector
 		delete[] m_vector;
 		m_vector = newVector;
-		m_capacity = size;
+		m_capacity = capacity;
 	}
 }
 
@@ -222,8 +226,7 @@ Vector& Vector::operator=(Vector&& other) noexcept
 	if (this != &other)
 	{
 		this->swap(other);
-		other.m_vector = nullptr;
-		other.m_size = other.m_capacity = 0;
+		other.init();
 	}
 	return *this;
 }
@@ -233,14 +236,14 @@ Vector& Vector::operator=(Vector&& other) noexcept
  * @param index the index of the element to return
  * @return the element at the given index
  **/
-int& Vector::operator[](size_t index)
+int Vector::operator[](size_t index)
 {
 	if (index >= m_size) {
 		throw std::out_of_range("Index out of range");
 	}
 	return m_vector[index];
 }
-const int& Vector::operator[](size_t index) const
+const int Vector::operator[](size_t index) const
 {
 	if (index >= m_size) {
 		throw std::out_of_range("Index out of range");
@@ -255,11 +258,8 @@ const int& Vector::operator[](size_t index) const
  **/
 bool Vector::operator==(const Vector& other) const
 {
-	if (m_size == other.m_size && 
-		std::equal(m_vector, m_vector + m_size, other.m_vector)) {
-			return true;
-	}
-	return false;
+	return m_size == other.size() && 
+		std::equal(m_vector, m_vector + m_size, other.data());
 }
 
 bool Vector::operator!=(const Vector& other) const
@@ -277,7 +277,7 @@ std::strong_ordering Vector::operator<=>(const Vector& other) const noexcept
 	if (*this == other) {
 		return std::strong_ordering::equal;
 	} 
-	else if (m_size < other.m_size) {
+	else if (m_size < other.size()) {
 		return std::strong_ordering::less;
 	}
 	return std::strong_ordering::greater;
@@ -302,12 +302,8 @@ int* Vector::end() const
  **/
 void Vector::check_capacity()
 {
-	// if capacity is 0, reserve 1 cell
-	if (m_capacity == 0) {
-		reserve(1);
-	}
 	// if capacity is equal to size, reserve more memory
-	else if (m_capacity == m_size) {
+	if (m_capacity == m_size) {
 		m_capacity < 128 ? reserve(m_capacity * 2) : reserve(m_capacity * 1.5);
 	}
 }

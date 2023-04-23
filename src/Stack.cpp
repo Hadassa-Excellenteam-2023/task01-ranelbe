@@ -110,7 +110,7 @@ Stack& Stack::operator+=(int value)
 }
 
 /**
- * operator += substract a value from all the elements in the stack
+ * operator -= substract a value from all the elements in the stack
  * @param value the value to substract
  * @return the stack after the substraction
  **/
@@ -140,6 +140,9 @@ Stack& Stack::operator*=(int value)
  * **/
 Stack& Stack::operator/=(int value)
 {
+	if (value == 0) {
+		throw std::invalid_argument("cannot divide by zero");
+	}
 	for (auto& element : m_stack) {
 		element /= value;
 	}
@@ -156,7 +159,7 @@ Stack Stack::operator+(const Stack& other) const
 	//concatinate the two stacks
 	Stack newStack(*this);
 	for (auto& element : other.m_stack) {
-		newStack.m_stack.push_back(element);
+		newStack.push(element);
 	}
 	return newStack;
 }

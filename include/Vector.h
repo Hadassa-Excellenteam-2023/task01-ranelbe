@@ -14,6 +14,7 @@ public:
 
 	// ========== methods ======================
 	int* data();
+	void init();
 	const int* data() const;
 	bool empty() const;
 	size_t size() const;
@@ -31,8 +32,8 @@ public:
 	Vector& operator=(const Vector& other);
 	Vector& operator=(Vector&& other) noexcept;
 
-	int& operator[](size_t index);
-	const int& operator[](size_t index) const;
+	int operator[](size_t index);
+	const int operator[](size_t index) const;
 
 	bool operator==(const Vector& other) const;
 	bool operator!=(const Vector& other) const;

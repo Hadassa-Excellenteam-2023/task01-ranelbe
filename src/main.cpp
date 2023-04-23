@@ -26,8 +26,8 @@ void vector_test() {
 	std::cout << "\nv7: " << v7;
 
 	// check the operator[] the regular version
-	v2[1] = 5;
-	std::cout << "\nv2: " << v2;
+	//v2[1] = 5;
+	//std::cout << "\nv2: " << v2;
 
 	// check the operator[] the const version
 	const Vector v8(2, 1);
@@ -81,10 +81,11 @@ void vector_test() {
 }
 
 void stack_test() {
+
 	// check the default ctor
 	Stack s1(1);
 	Stack s2(2, 1);
-	std::cout << "s1: " << s1 << "\ns2: " << s2;
+	std::cout << "\ns1: " << s1 << "\ns2: " << s2;
 
 	// check the copy ctor
 	Stack s3(s1);
@@ -137,6 +138,12 @@ void stack_test() {
 	// check the operators between two stacks
 	s2+=s4+=s1+=s2;
 	std::cout << "\ns2+=s4+=s1+=s2: " << s2;
+
+	try {
+		s2 /= 0;
+	} catch (const std::exception& e) {
+		std::cout << "\nException: " << e.what();
+	}
 }
 
 
@@ -144,6 +151,5 @@ int main()
 {
 	vector_test();
 	stack_test();
-	return 0;
+	return EXIT_SUCCESS;
 }
-
